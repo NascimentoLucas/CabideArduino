@@ -9,20 +9,20 @@ class WiffiObject{
   int statusLed = LOW; //VARIÁVEL QUE ARMAZENA O ESTADO ATUAL DO LED (LIGADO / DESLIGADO)
   
   WiFiEspClient client;
-  inline void getLine(WiFiEspClient client, char head[],int value){
-    client.print("<p>");
-    client.print(head);
-    client.print(value);
-    client.println("</p>");
+  inline void sendLine(WiFiEspClient client, char head[],int value){
+    //client.print(";");
+    //client.print(head);
+    client.println(value);
+    client.print(";");
   }
 
   void sendHttpResponse(WiFiEspClient client){
-    getLine(client, "Ac x: ", go.lastAcX);
-    getLine(client, "Ac y: ", go.lastAcY);
-    getLine(client, "Ac z: ", go.lastAcZ);
-    getLine(client, "Gy x: ", go.lastGyX);
-    getLine(client, "Gy y: ", go.lastGyY);
-    getLine(client, "Gy z: ", go.lastGyZ);
+    sendLine(client, "Ac x: ", go.lastAcX);
+    sendLine(client, "Ac y: ", go.lastAcY);
+    sendLine(client, "Ac z: ", go.lastAcZ);
+    sendLine(client, "Gy x: ", go.lastGyX);
+    sendLine(client, "Gy y: ", go.lastGyY);
+    sendLine(client, "Gy z: ", go.lastGyZ);
       /*
       client.println("HTTP/1.1 200 OK"); //ESCREVE PARA O CLIENTE A VERSÃO DO HTTP
       client.println("Content-Type: text/html"); //ESCREVE PARA O CLIENTE O TIPO DE CONTEÚDO(texto/html)
@@ -66,7 +66,6 @@ class WiffiObject{
     }
     
     void update(WiFiEspServer server, RingBuffer buf){    
-      client = server.available(); //ATENDE AS SOLICITAÇÕES DO CLIENTE
       if (client) { //SE CLIENTE TENTAR SE CONECTAR, FAZ
         buf.init(); //INICIALIZA O BUFFER
         while (client.connected()){ //ENQUANTO O CLIENTE ESTIVER CONECTADO, FAZ
@@ -92,8 +91,11 @@ class WiffiObject{
           }
         }
 
-        go.wiffiUpdate();
         client.stop(); //FINALIZA A REQUISIÇÃO HTTP E DESCONECTA O CLIENTE
+      }
+      else{              
+        client = server.available(); //ATENDE AS SOLICITAÇÕES DO CLIENTE
+        go.wiffiUpdate();
       }
     }
     
