@@ -28,10 +28,8 @@ class GiroObject{
 
     void wiffiUpdate(){
       update();      
-      acX=Wire.read()<<8|Wire.read(); //0x3B (ACCEL_XOUT_H) & 0x3C (ACCEL_XOUT_L)  if(dif(lastAcX, acX)) {
-      if(dif(lastAcX, acX)) {
-        lastAcX = acX;
-      }
+      updateAcel();
+      updateGyro();
     }
 
     void update(){
@@ -47,19 +45,17 @@ class GiroObject{
     inline void updateAcel(){ 
       acX=Wire.read()<<8|Wire.read(); //0x3B (ACCEL_XOUT_H) & 0x3C (ACCEL_XOUT_L)     
       acY=Wire.read()<<8|Wire.read(); //0x3D (ACCEL_YOUT_H) & 0x3E (ACCEL_YOUT_L)
-      acZ=Wire.read()<<8|Wire.read(); //0x3F (ACCEL_ZOUT_H) & 0x40 (ACCEL_ZOUT_L)  
-      if(dif(lastAcX, acX)) {
-        Serial.print("Acel. X = "); Serial.println(acX);  
+      acZ=Wire.read()<<8|Wire.read(); //0x3F (ACCEL_ZOUT_H) & 0x40 (ACCEL_ZOUT_L) 
+
+      if(dif(lastAcX, acX)) {        
         lastAcX = acX;
       }
       
-      if(dif(lastAcY, acY)) {
-        Serial.print("Acel. Y =  "); Serial.println(acY);        
+      if(dif(lastAcY, acY)) {        
         lastAcY = acY;
       }
       
-      if(dif(lastAcZ, acZ)) {
-        Serial.print("Acel. Z = "); Serial.println(acZ);         
+      if(dif(lastAcZ, acZ)) {        
         lastAcZ = acZ;
       }
       
@@ -71,17 +67,14 @@ class GiroObject{
       gyZ=Wire.read()<<8|Wire.read(); //0x47 (GYRO_ZOUT_H) & 0x48 (GYRO_ZOUT_L)
 
       if(dif(lastGyX, gyX)) {
-        Serial.print("Gir. X = "); Serial.println(gyX);
         lastGyX = gyX;
       }
       
-      if(dif(lastGyY, gyY)) {
-        Serial.print("Gir. Y =  "); Serial.println(gyY);        
+      if(dif(lastGyY, gyY)) {       
         lastGyY = gyY;
       }
       
-      if(dif(lastGyZ, gyZ)) {
-        Serial.print("Gir. Z = "); Serial.println(gyZ);         
+      if(dif(lastGyZ, gyZ)) {        
         lastGyZ = gyZ;
       }
     }

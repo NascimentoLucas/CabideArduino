@@ -9,9 +9,20 @@ class WiffiObject{
   int statusLed = LOW; //VARIÁVEL QUE ARMAZENA O ESTADO ATUAL DO LED (LIGADO / DESLIGADO)
   
   WiFiEspClient client;
+  inline void getLine(WiFiEspClient client, char head[],int value){
+    client.print("<p>");
+    client.print(head);
+    client.print(value);
+    client.println("</p>");
+  }
+
   void sendHttpResponse(WiFiEspClient client){
-      client.println("ACX");
-      client.println(go.lastAcX);
+    getLine(client, "Ac x: ", go.lastAcX);
+    getLine(client, "Ac y: ", go.lastAcY);
+    getLine(client, "Ac z: ", go.lastAcZ);
+    getLine(client, "Gy x: ", go.lastGyX);
+    getLine(client, "Gy y: ", go.lastGyY);
+    getLine(client, "Gy z: ", go.lastGyZ);
       /*
       client.println("HTTP/1.1 200 OK"); //ESCREVE PARA O CLIENTE A VERSÃO DO HTTP
       client.println("Content-Type: text/html"); //ESCREVE PARA O CLIENTE O TIPO DE CONTEÚDO(texto/html)
