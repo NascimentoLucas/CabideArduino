@@ -17,12 +17,21 @@ class WiffiObject{
   }
 
   void sendHttpResponse(WiFiEspClient client){
-    sendLine(client, "Ac x: ", go.lastAcX);
-    sendLine(client, "Ac y: ", go.lastAcY);
-    sendLine(client, "Ac z: ", go.lastAcZ);
-    sendLine(client, "Gy x: ", go.lastGyX);
-    sendLine(client, "Gy y: ", go.lastGyY);
-    sendLine(client, "Gy z: ", go.lastGyZ);
+    //sendLine(client, "Ac x: ", go.lastAcX);
+    //sendLine(client, "Ac y: ", go.lastAcY);
+    //sendLine(client, "Ac z: ", go.lastAcZ);
+    //sendLine(client, "Gy x: ", go.lastGyX);
+    //sendLine(client, "Gy y: ", go.lastGyY);
+    //sendLine(client, "Gy z: ", go.lastGyZ);
+    String s = "";
+    s = s + "lastAcX=" + go.lastAcX + ";";
+    s = s + "lastAcY=" + go.lastAcY + ";";
+    s = s + "lastAcZ=" + go.lastAcZ + ";";
+    s = s + "lastGyX=" + go.lastGyX + ";";
+    s = s + "lastGyY=" + go.lastGyY + ";";
+    s = s + "lastGyZ=" + go.lastGyZ + ";";
+    
+    client.println(s);
       /*
       client.println("HTTP/1.1 200 OK"); //ESCREVE PARA O CLIENTE A VERSÃO DO HTTP
       client.println("Content-Type: text/html"); //ESCREVE PARA O CLIENTE O TIPO DE CONTEÚDO(texto/html)

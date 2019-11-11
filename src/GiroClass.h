@@ -4,7 +4,7 @@ class GiroObject{
   
   
   public:
-    int minDiff = 500;    
+    int minDiff = 0;    
     int acX,acY,acZ,tmp,gyX,gyY,gyZ;
     int lastAcX,lastAcY,lastAcZ,lastTmp,lastGyX,lastGyY,lastGyZ;  
     
