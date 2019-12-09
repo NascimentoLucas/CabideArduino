@@ -4,7 +4,7 @@
 
 
 
-SoftwareSerial Serial1(6, 7); //PINOS QUE EMULAM A SERIAL, ONDE O PINO 6 É O RX E O PINO 7 É O TX  
+SoftwareSerial Serial1(6, 7); 
 WiFiEspServer server(80); //CONEXÃO REALIZADA NA PORTA 80
 RingBuffer buf(8); //BUFFER PARA AUMENTAR A VELOCIDADE E REDUZIR A ALOCAÇÃO DE MEMÓRIA
 
